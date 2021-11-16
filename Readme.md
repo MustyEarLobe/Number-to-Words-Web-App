@@ -1,7 +1,7 @@
--Download Repo
--Open in Vs Community
+1. Download Repo
+2. Open in Vs Community
 
 *For Web App*
--Run using "IIS Express"
+3.1. Run using "IIS Express"
 *for NUnit Tests*
--Run tests using "Test Explorer"
+3.2. Run tests using "Test Explorer"
