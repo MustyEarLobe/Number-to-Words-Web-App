@@ -2,8 +2,10 @@
 2. Open in Vs Community
 
 *For Web App*
+
 3. Run using "IIS Express"
 
 
-*for NUnit Tests*
+*For NUnit Tests*
+
 3. Run tests using "Test Explorer"
