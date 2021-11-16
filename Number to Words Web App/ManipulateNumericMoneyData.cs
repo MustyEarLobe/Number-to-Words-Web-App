@@ -6,9 +6,9 @@ namespace Number_to_Words_Web_App
 {
     public static class ManipulateNumericMoneyData
     {
-        static string[] ones = new string[] { "", "One ", "Two ", "Three ", "Four ", "Five ", "Six ", "Seven ", "Eight ", "Nine ", "Ten ", "Eleven ", "Twelve ", "Thirteen ", "Fourteen ", "Fifteen ", "Sixteen ", "Seventeen ", "Eighteen ", "NineTeen " };
-        static string[] tens = new string[] { "", "", "Twenty ", "Thirty ", "Forty ", "Fifty ", "Sixty ", "Seventy ", "Eighty ", "Ninety " };
-        static string[] positiveExponentsOfThousand = new string[] { "", "", "Thousand ", "Million ", "billion ", "trillion " };
+        static string[] ones = new string[] { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "NineTeen" };
+        static string[] tens = new string[] { "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
+        static string[] positiveExponentsOfThousand = new string[] { "", "", "Thousand", "Million", "billion", "trillion" };
 
         public static string ConvertNumbToWords(this string numericString)
         {
@@ -29,9 +29,9 @@ namespace Number_to_Words_Web_App
                 return "Please Enter Valid Number (Dollars And Cents)";
             }
 
-            Result = Result.HandleDollars(dollarsAndCentsString).HandleCents(dollarsAndCentsString);            
+            Result = Result.HandleDollars(dollarsAndCentsString).HandleCents(dollarsAndCentsString);
 
-            return Result;
+            return Result.ToUpper(); ;
         }
         public static bool IsValidInput(this string[] input)
         {
@@ -71,8 +71,9 @@ namespace Number_to_Words_Web_App
                 for (int i = 0; i < dollarsStrings.Count(); i++)
                 {
                     dollars = Convert.ToInt32(dollarsStrings[i]);
+                    
                     result = result.HandleHundreds(dollars).HandelTensAndOnes(dollars);
-                    result += positiveExponentsOfThousand[dollarsStrings.Count() - i];
+                    result += " " + positiveExponentsOfThousand[dollarsStrings.Count() - i];
                 }
                 if (result == "One ")
                 {
@@ -102,11 +103,11 @@ namespace Number_to_Words_Web_App
 
                 if (cents == 1)
                 {
-                    result += "Cent ";
+                    result += " Cent";
                 }
                 else
                 {
-                    result += "Cents ";
+                    result += " Cents";
                 }
             }
             return result;
@@ -138,20 +139,28 @@ namespace Number_to_Words_Web_App
         {
             if (InputNumb / 100 >= 1)
             {
-                inputString += ones[InputNumb / 100] + "Hundred ";
+                inputString += ones[InputNumb / 100] + " Hundred";
             }
             if (InputNumb % 100 > 0 && InputNumb / 100 >= 1)
             {
-                inputString += "And ";
+                inputString += " And";
             }
             return inputString;
         }
 
         public static string HandelTensAndOnes(this string inputString, int InputNumb)
         {
+            if (InputNumb > 99)
+            {
+                inputString += " ";
+            }
             if ((InputNumb % 100) > 19)
             {
                 inputString += tens[(InputNumb % 100) / 10];
+                if (InputNumb % 10 > 0)
+                {
+                    inputString += "-";
+                }
                 inputString += ones[(InputNumb % 10)];
             }
             else
