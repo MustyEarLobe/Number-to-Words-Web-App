@@ -1,0 +1,20 @@
+﻿@model HomeModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <form>
+        <label for="Numeric">Enter Numeric:</label><br>
+        <input type="text" id="Numeric" name="Numeric"><br>
+        <button id="submitNumeric">Submit</button>
+        @if (Model.ShowNonNumericalVal)
+        {
+             <p for="Numeric" id="Results" >@Model.NonNumerical</p> 
+        }
+
+    </form>
+    
+
+</div>
