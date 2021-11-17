@@ -1,22 +1,17 @@
 using NUnit.Framework;
 using Number_to_Words_Web_App;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using Assert = NUnit.Framework.Assert;
 
 namespace Number_to_Words_Web_App_Unit_Tests
 {
     public class Tests
     {
-        
-
-
-
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void ThisShouldAlwaysPass()
         {
+            //Sanity Test
             Assert.Pass();
         }
 
@@ -27,62 +22,76 @@ namespace Number_to_Words_Web_App_Unit_Tests
             string GoodInput1ExpectedResult = "ONE THOUSAND DOLLARS AND FIFTY CENTS";
             string GoodInput2 = "123.01";
             string GoodInput2ExpectedResult = "ONE HUNDRED AND TWENTY-THREE DOLLARS AND ONE CENT";
-            string BadInput1 = "!123.45";            
-            string BadInput2 = "0.50c";
-            string BadInputsExpectedResult = "Please Enter Valid Number (Dollars And Cents)";
 
-            string result1 = GoodInput1.ConvertNumbToWords();
-            string result2 = GoodInput2.ConvertNumbToWords();
-            string result3 = BadInput1.ConvertNumbToWords();
-            string result4 = BadInput2.ConvertNumbToWords();
+            string result1 = GoodInput1.ConvertNumToWords();
+            string result2 = GoodInput2.ConvertNumToWords();
+
 
             Assert.AreEqual(result1, GoodInput1ExpectedResult);
             Assert.AreEqual(result2, GoodInput2ExpectedResult);
-            Assert.AreEqual(result3, BadInputsExpectedResult);
-            Assert.AreEqual(result4, BadInputsExpectedResult);
 
         }
 
         [Test]
-        public void CheckValidationIsWorking()
+        [ExpectedException(typeof(FormatException))]
+        public void ManipulateNumericMoneyDataShouldThrowExeptionWhenInputIsNotMoney()
         {
-            string[] TestString1Good = new string[] { "100", "23" };
-            string[] TestStringBad = new string[] {"!123","30c" };
+            string BadInput = "!123.45";
 
-            Assert.IsTrue(TestString1Good.IsValidInput());
-            Assert.IsFalse(TestStringBad.IsValidInput());
+            try
+            {
+                string result = BadInput.ConvertNumToWords();
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("Input string was not in a correct format.", e.Message);
+            }
         }
 
         [Test]
-        public void CheckHundredsAreConvertingToWords()
+        [ExpectedException(typeof(FormatException))]
+        public void ManipulateNumericMoneyDataShouldThrowExeptionWhenInvalidCharactersAreInput()
         {
-            int TestInt1 = 100;
-            //this demonstrates that it can convert with out tens and ones extra
-            string TestInt1ExpectedResult = "One Hundred";
-            int TestInt2 = 355;
-            //This should if tens and ones are there it should append "And" to link the sentence.
-            string TestInt2ExpectedResult = "Three Hundred And";
-
-            string result1 = "".HandleHundreds(TestInt1);
-            string result2 = "".HandleHundreds(TestInt2);
-
-            Assert.AreEqual(result1, TestInt1ExpectedResult);
-            Assert.AreEqual(result2, TestInt2ExpectedResult);
+            string BadInput = "0.50c";
+            try
+            {
+                string result = BadInput.ConvertNumToWords();
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("Invalid cents amount.", e.Message);
+            }
         }
 
         [Test]
-        public void CheckOnesAndTensAreConvertingToWords()
+        [ExpectedException(typeof(FormatException))]
+        public void ManipulateNumericMoneyDataShouldThrowExeptionWhenCentsInputIsTooLong()
         {
-            int TestInt1 = 12;
-            string TestInt1ExpectedResult = "Twelve";
-            int TestInt2 = 25;
-
-            string TestInt2ExpectedResult = "Twenty-Five";
-            string result1 = "".HandelTensAndOnes(TestInt1);
-            string result2 = "".HandelTensAndOnes(TestInt2);
-
-            Assert.AreEqual(result1, TestInt1ExpectedResult);
-            Assert.AreEqual(result2, TestInt2ExpectedResult);            
+            string BadInput = "0.001";
+            try
+            {
+                string result = BadInput.ConvertNumToWords();
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("Invalid cents amount.", e.Message);
+            }
         }
+
+        [Test]
+        [ExpectedException(typeof(FormatException))]
+        public void ManipulateNumericMoneyDataShouldThrowExeptionWhenMultipleDecPointsAreInput()
+        {
+            string BadInput = "0.001.1";
+            try
+            {
+                string result = BadInput.ConvertNumToWords();
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual("Invalid input, currency format dollars.cents", e.Message);
+            }
+        }
+
     }
 }

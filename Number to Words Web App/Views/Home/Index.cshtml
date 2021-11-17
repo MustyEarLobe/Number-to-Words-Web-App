@@ -11,7 +11,7 @@
         <button id="submitNumeric">Submit</button>
         @if (Model.ShowNonNumericalVal)
         {
-             <p for="Numeric" id="Results" >@Model.NonNumerical</p> 
+             <p for="Numeric" id="Results" @Model.ResultType class="Error" >@Model.NonNumerical</p> 
         }
 
     </form>

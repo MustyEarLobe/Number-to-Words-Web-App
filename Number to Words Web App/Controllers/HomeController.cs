@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Number_to_Words_Web_App.Models;
+using System;
 using System.Diagnostics;
 
 namespace Number_to_Words_Web_App.Controllers
@@ -17,7 +18,17 @@ namespace Number_to_Words_Web_App.Controllers
         public IActionResult Index(string Numeric)
         {
             var model = new HomeModel();
-            model.NonNumerical = HandleNumericConversion(Numeric);
+            try
+            {
+                model.ResultType = "class=";
+                model.NonNumerical = HandleNumericConversion(Numeric);
+            }
+            catch (Exception e)
+            {
+                model.ResultType = "class=Error";
+                model.NonNumerical = e.Message;
+
+            }
             return View(model);
         }
 
@@ -26,7 +37,7 @@ namespace Number_to_Words_Web_App.Controllers
             string result = "Enter Numeric Number Above";
             if (!string.IsNullOrWhiteSpace(val))
             {
-                result = val.ConvertNumbToWords();
+                result = val.ConvertNumToWords();
             }
             return result;
         }
