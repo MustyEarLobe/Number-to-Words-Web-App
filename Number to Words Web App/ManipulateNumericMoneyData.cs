@@ -68,7 +68,7 @@ namespace Number_to_Words_Web_App
                 
                     inputString += positiveExponentsOfThousand[dollarsStrings.Count() - i].AppendSpaceIfNeeded();
                 }
-                if (inputString == "One")
+                if (inputString == "One ")
                 {
                     inputString += "Dollar";
                 }
