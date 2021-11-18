@@ -75,7 +75,7 @@ namespace Number_to_Words_Web_App
                     result = result.HandleHundreds(dollars).HandelTensAndOnes(dollars);
                     result += " " + positiveExponentsOfThousand[dollarsStrings.Count() - i];
                 }
-                if (inputString == "One")
+                if (result == "One ")
                 {
                     result += "Dollar ";
                 }
