@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Number to Words Web App", "Number to Words Web App\Number to Words Web App.csproj", "{F7F98291-0860-40A6-8857-846233BCDA49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Number to Words Web App Unit Tests", "Number to Words Web App Unit Tests\Number to Words Web App Unit Tests.csproj", "{5A6775AB-27AF-4D7F-A43C-E9DC84561DC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Number to Words Web App Unit Tests", "Number to Words Web App Unit Tests\Number to Words Web App Unit Tests.csproj", "{5A6775AB-27AF-4D7F-A43C-E9DC84561DC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
